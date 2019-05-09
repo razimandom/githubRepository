@@ -7,8 +7,9 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class GenericAPICallLogic {
+import org.springframework.beans.factory.annotation.Value;
 
+public class GenericAPICallLogic {
 
 	public String getRepository(String hostname, String subURL, String topic, String language, String sortBy, String sortOrder) throws Exception {
 
@@ -66,6 +67,7 @@ public class GenericAPICallLogic {
 					input.close();
 				} catch (IOException e) {
 					System.out.println("Unable to close input stream");
+					e.printStackTrace();
 				}
 			}
 
