@@ -3,28 +3,39 @@ package com.raziman.petronas.logic;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import com.raziman.petronas.logic.map.GitHubRepoMap;
 import com.raziman.petronas.model.GitOwnerModel;
 import com.raziman.petronas.model.GitRepoModel;
 
-
-
-	
 public class RepoLogic {
 	
-	@Value("${github.hostname}")
-	private String hostname;
+	@Autowired
+	private Environment env;
+	
+//	@Value("${github.hostname}")
+//	private String hostname;
+//
+//	@Value("${welcome.message}")
+//	private String subURL;
+//	
+//	@Value("${github.sortBy}")
+//	private String sortBy;
+//	
+//	@Value("${github.sortOrder}")
+//	private String sortOrder;
+	
+//	String hostname = env.getProperty("github.hostname");
+//	String subURL = env.getProperty("github.hostname");;
+//	String sortBy = env.getProperty("github.hostname");;
+//	String sortOrder = env.getProperty("github.hostname");;
 
-	@Value("${welcome.message}")
-	private String subURL;
-	
-	@Value("${github.sortBy}")
-	private String sortBy;
-	
-	@Value("${github.sortOrder}")
-	private String sortOrder;
+	String hostname = "https://api.github.com";
+	String subURL = "/search/repositories";
+	String sortBy = "starts";
+	String sortOrder = "desc";
 	
 	public void viewRepo(String topic, String language) throws Exception {
 		
