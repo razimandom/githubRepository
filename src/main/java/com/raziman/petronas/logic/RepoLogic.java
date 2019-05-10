@@ -34,8 +34,42 @@ public class RepoLogic {
 
 	String hostname = "https://api.github.com";
 	String subURL = "/search/repositories";
-	String sortBy = "starts";
+	String sortBy = "created";
 	String sortOrder = "desc";
+	
+	public String getCount(String topic, String language) throws Exception {
+		
+		GenericAPICallLogic apiCall = new GenericAPICallLogic();
+		GitHubRepoMap repoMap = new GitHubRepoMap();
+		
+		String responseBody = apiCall.getRepository(hostname, subURL, topic, language, sortBy, sortOrder);
+		
+		return repoMap.getRepoCount(responseBody);
+	}
+	
+	public List<GitRepoModel> getRepository(String topic, String language) throws Exception {
+		
+		GenericAPICallLogic apiCall = new GenericAPICallLogic();
+		GitHubRepoMap repoMap = new GitHubRepoMap();
+		
+		System.out.println(hostname);
+		System.out.println(subURL);
+		
+		String responseBody = apiCall.getRepository(hostname, subURL, topic, language, sortBy, sortOrder);
+
+		System.out.println("Total Found: " + repoMap.getRepoCount(responseBody));
+		
+		List<GitRepoModel> repoObjList = repoMap.getRepoListObject(responseBody);
+		
+		Optional<List<GitRepoModel>> optRepoList = Optional.ofNullable(repoObjList);
+		
+		if (optRepoList.isPresent()) {
+			return repoObjList;
+		}
+		
+		return null;
+		
+	}
 	
 	public void viewRepo(String topic, String language) throws Exception {
 		
