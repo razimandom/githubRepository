@@ -2,16 +2,16 @@ package com.raziman.petronas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@SpringBootApplication
-public class PetronasApplication extends SpringBootServletInitializer {
+import com.raziman.petronas.properties.FileStorageProperties;
 
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//		return application.sources(PetronasApplication.class);
-//	}
+@SpringBootApplication
+@EnableConfigurationProperties({
+	FileStorageProperties.class
+})
+public class PetronasApplication extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PetronasApplication.class, args);

@@ -1,4 +1,4 @@
-package com.raziman.petronas.logic.map;
+package com.raziman.petronas.map;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,10 +7,10 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.raziman.petronas.model.GitOwnerModel;
-import com.raziman.petronas.model.GitRepoModel;
+import com.raziman.petronas.model.GitOwner;
+import com.raziman.petronas.model.GitRepo;
 
-public class GitHubRepoMap {
+public class GitRepoMapping {
 	
 	public String getRepoCount(String responseBody) {
 		
@@ -48,24 +48,33 @@ public class GitHubRepoMap {
 		
 	}
 	
-	public List<GitRepoModel> getRepoListObject(String responseBody) {
+	public List<GitRepo> getRepoListObject(String responseBody) {
 		
 		try {
 			
 			JsonNode jsonResponse = new ObjectMapper().readTree(responseBody);
 			ArrayNode arrNode = (ArrayNode) jsonResponse.get("items");
-			List<GitRepoModel> repoObjList = new ArrayList<>();
+			List<GitRepo> repoObjList = new ArrayList<>();
 			
 			if (arrNode.size()!=0) {
 			
 				for (int x=0; x<arrNode.size(); x++) {
-					GitRepoModel repoObj = new GitRepoModel();
+					GitRepo repoObj = new GitRepo();
+					repoObj.setRepoNo(x+1);
 					repoObj.setRepoId(arrNode.get(x).get("id").asText());
 					repoObj.setRepoName(arrNode.get(x).get("name").asText());
 					repoObj.setRepoPrivate(arrNode.get(x).get("private").asText());
 					repoObj.setRepoDescription(arrNode.get(x).get("description").asText());
 					repoObj.setRepoURL(arrNode.get(x).get("html_url").asText());
 					repoObj.setRepoOwnerId(arrNode.get(x).get("owner").get("id").asText());
+					repoObj.setRepoHomePage(arrNode.get(x).get("homepage").asText());
+					repoObj.setRepoDateCreated(arrNode.get(x).get("created_at").asText());
+					repoObj.setRepoDateUpdated(arrNode.get(x).get("updated_at").asText());
+					repoObj.setRepoDatePushed(arrNode.get(x).get("pushed_at").asText());
+					repoObj.setRepoSize(arrNode.get(x).get("size").asText());
+					repoObj.setRepoWatcherCount(arrNode.get(x).get("watchers_count").asText());
+					repoObj.setRepoScore(arrNode.get(x).get("score").asText());
+					repoObj.setRepoLanguage(arrNode.get(x).get("language").asText());
 					repoObjList.add(repoObj);
 				}
 				
@@ -79,13 +88,13 @@ public class GitHubRepoMap {
 		return null;
 	}
 	
-	public GitOwnerModel getOwner(String responseBody, String repoOwnerId) {
+	public GitOwner getOwner(String responseBody, String repoOwnerId) {
 		
 		try {
 			
 			JsonNode jsonResponse = new ObjectMapper().readTree(responseBody);
 			ArrayNode arrNode = (ArrayNode) jsonResponse.get("items");
-			GitOwnerModel ownerObj = new GitOwnerModel();
+			GitOwner ownerObj = new GitOwner();
 			
 			if (arrNode.size()==0)
 				throw new Exception("No item found");

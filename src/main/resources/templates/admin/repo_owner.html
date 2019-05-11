@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Petronas Technical Test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Petronas Technical Test</h1>
+  <div class="alert alert-success">Created by Raziman Dom.</div>
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Repository Owner</h3>
+      <p th:text="'Repository Name: ' + ${count}" />
+      
+    </div>
+
+			<div class="col-sm-12">
+				<h3>
+					<p th:text="'Records Found: ' + ${count}" />
+				</h3>
+
+				<div th:if="${not #lists.isEmpty(repoListContainer)}">
+					<table class="table table-striped">
+						<tr>
+						
+							<th>repoId</th>
+							<th>repoName</th>
+							<th>repoPrivate</th>
+							<!-- <th>repoDescription</th> -->
+							<th>repoURL</th>
+							<th>repoOwnerId</th>
+						</tr>
+						<tr th:each="count : ${repoListContainer}">
+							<td th:text="${count.repoId}"></td>
+							<td th:text="${count.repoName}"></td>
+							<td th:text="${count.repoPrivate}"></td>
+							<!-- <td th:text="${count.repoDescription}"></td> -->
+							<td th:text="${count.repoURL}"></td>
+							<td th:text="${count.repoOwnerId}"></td>
+						</tr>
+					</table>
+				</div>
+				<button type="submit" class="btn btn-success">Download Profile</button>
+
+		</div>
+</div>
+
+
+</body>
+</html>

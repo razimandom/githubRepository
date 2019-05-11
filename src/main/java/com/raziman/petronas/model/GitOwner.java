@@ -1,6 +1,6 @@
 package com.raziman.petronas.model;
 
-public class GitOwnerModel {
+public class GitOwner {
 
 	private String ownerid;
 	private String ownerURL;

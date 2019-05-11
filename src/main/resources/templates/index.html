@@ -1,42 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Petronas Technical Test</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 { 
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+  }
+  .bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+  .bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+  }
+  .bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+  }
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }
+  </style>
 </head>
 <body>
 
-<div class="jumbotron text-center">
-  <h1>Petronas Technical Test</h1>
-  <div class="alert alert-success">Created by Raziman Dom.</div>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="/">Petronas</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/repository">Browse</a></li>
+        <li><a href="/admin">Admin</a></li>
+        <li><a href="https://github.com/razimandom/githubRepository">Source Code</a></li>
+        <li><a href="http://razimandom.com/">My Portfolio</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">Petronas Technical Test</h3>
+  <img src="../static/images/petronas_logo.png" width="200" th:src="@{images/petronas_logo.png}" />
+  <h3>Created by Raziman Dom</h3>
 </div>
-  
-<div class="container">
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">About Projects</h3>
+  <p>Search github repository by using github API. This project contains public and admin view.</p><br>
+  <a href="/repository"><img src="../static/images/user.png" width="200" th:src="@{images/user.png}" /></a>
+  <a href="/admin"><img src="../static/images/admin.png" width="200" th:src="@{images/admin.png}" /></a>
+  <a href="https://github.com/razimandom/githubRepository"><img src="../static/images/github.png" width="200" th:src="@{images/github.png}" /></a>
+</div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">    
+  <h3 class="margin">Requirements</h3><br>
   <div class="row">
     <div class="col-sm-4">
-      <h3>Task 1</h3>
-      <p>Create github browse page</p>
-      <button type="button" onclick="location.href='/repository'" class="btn btn-success">Click Here</button>
+      <p>Tech Used</p>
+      <p>Java 8, Spring Boot, Bootstrap 3, AWS</p>
     </div>
-    <div class="col-sm-4">
-      <h3>Task 2</h3>
-      <p>Create admin page for report</p>
-      <button type="button" onclick="location.href='/admin'" class="btn btn-success">Click Here</button>
+    <div class="col-sm-4"> 
+      <p>Admin Requirement</p>
+      <p>Login page, download search record, summary of record</p>
     </div>
-    <div class="col-sm-4">
-      <h3>Project Details</h3>
-	  <div class="btn-group">
-	  <p>Information about this project</p>
-	    <button type="button" class="btn btn-success">View in Github</button>
-	    <button type="button" class="btn btn-success">View Readme</button>
-	  </div>   
+    <div class="col-sm-4"> 
+      <p>User requirement</p>
+      <p>Search repository by topic, search repository by language, display records in table with pagination</p>
     </div>
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>Created for demonstration purpose only</a></p> 
+</footer>
 
 </body>
 </html>

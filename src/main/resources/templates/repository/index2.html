@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Petronas Technical Test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="jumbotron text-center">
+		<h1>Petronas Technical Test</h1>
+		<div class="alert alert-success">Created by Raziman Dom.</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<h3>Search Repository</h3>
+				<!--      <p>Search Repository</p> -->
+
+				<!-- <form method="post" th:action="@{/repository/search/topic/__${topic}__}">
+ <input type="text" name="topic" id="topic" placeholder="topic"/>
+<button type="submit" class="btn btn-success">Get Details</button>
+</form> -->
+
+				<form action="/repository/search/topic/{topic}">
+					<div class="form-group">
+						<label for="topic">Topic:</label> <input type="text"
+							class="form-control" id="topic">
+					</div>
+					<div class="form-group">
+						<label for="language">Language:</label> <input type="text"
+							class="form-control" id="language">
+					</div>
+					<button type="submit" class="btn btn-success">Search</button>
+				</form>
+
+				<!--  		<form th:action="@{/repository/search}" th:object="${GitRepo}" method="post">
+		    <button type="submit">Delete</button>
+		</form> -->
+
+				<!--       <form:form method = "POST" action = "/repository/search/topic/{topic}">
+         <table>
+            <tr>
+              <td><form:label path = "topic"/>topic</form:label></td>
+              <td><form:input path = "topic"/></td>
+            </tr>
+            <tr>
+              <td>< </td>
+              <td><form:hidden path = "id" value = "1" /></td>
+            </tr>
+            <tr>
+              <td colspan = "2">
+                  <input type = "submit" value = "Submit"/>
+              </td>
+            </tr>
+         </table>  
+      </form:form> -->
+
+				<br>
+				<p th:text="'Search Topic: ' + ${topic}" />
+				<p th:text="'Search Language: ' + ${language}" />
+				<br>
+				
+				<h3>Example: </h3>
+
+				<table>
+					<tr>
+						<form action="/repository/search/topic/petronas">
+							<button type="submit" class="btn btn-warning">Petronas</button>
+						</form>
+						<form action="/repository/search/topic/shell">
+							<button type="submit" class="btn btn-warning">Shell</button>
+						</form>
+						<form action="/repository/search/topic/caltex">
+							<button type="submit" class="btn btn-warning">Caltex</button>
+						</form>
+						<form action="/repository/search/topic/esso">
+							<button type="submit" class="btn btn-warning">ESSO</button>
+						</form>
+						<form action="/repository/search/language/java">
+							<button type="submit" class="btn btn-info">Java</button>
+						</form>
+						<form action="/repository/search/language/python">
+							<button type="submit" class="btn btn-info">Python</button>
+						</form>
+						<form action="/repository/search/language/go">
+							<button type="submit" class="btn btn-info">Go</button>
+						</form>
+						<form action="/repository/search/language/typescript">
+							<button type="submit" class="btn btn-info">TypeScript</button>
+						</form>
+						<form action="/repository/search/language/html">
+							<button type="submit" class="btn btn-info">HTML</button>
+						</form>
+						<form action="/repository/search/language/c">
+							<button type="submit" class="btn btn-info">C</button>
+						</form>
+						<form action="/repository/search/language/php">
+							<button type="submit" class="btn btn-info">PHP</button>
+						</form>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-sm-9">
+
+
+				<h3>
+					<p th:text="'Records Found: ' + ${count}" />
+				</h3>
+
+				<div th:if="${not #lists.isEmpty(repoListContainer)}">
+					<table class="table table-striped">
+						<tr>
+
+							<th>Id</th>
+							<th>Name</th>
+							<th>Language</th>
+							<!-- <th>repoDescription</th> -->
+							<th>URL</th>
+							<th>Owner Id</th>
+						</tr>
+						<tr th:each="count : ${repoListContainer}">
+							<td th:text="${count.repoId}"></td>
+							<td th:text="${count.repoName}"></td>
+							<td th:text="${count.repoLanguage}"></td>
+							<!-- <td th:text="${count.repoDescription}"></td> -->
+							<!-- <td th:text="${count.repoURL}"></td> -->
+							<td><a th:href="${count.repoURL}">View Repository</a></td>
+							<td th:text="${count.repoOwnerId}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
