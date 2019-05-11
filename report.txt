@@ -1,4 +1,12 @@
 RepoId     OwnerId    RepoName                       Private    RepoDescription                                                                  
  
-1797189    678061     petronas                       false      Distributed File System in user space. Initial prototyping in Java.              
-141632493  6805470    modhadoop                      false      Modification of Hadoop scheduler as part of my PhD works at Universiti Teknologi PETRONAS, Malaysia 
+21289110   652070     awesome-python                 false      A curated list of awesome Python frameworks, libraries, software and resources   
+83222441   5458997    system-design-primer           false      Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards. 
+54346799   1655968    public-apis                    false      A collective list of free APIs for use in software and web development.          
+51117837   15658638   models                         false      Models and examples built with TensorFlow                                        
+1039520    48381040   youtube-dl                     false      Command-line program to download videos from YouTube.com and other video sites   
+596892     16748505   flask                          false      The Python micro framework for building web applications.                        
+33614304   1114542    thefuck                        false      Magnificent app which corrects your previous console command.                    
+3544424    326885     httpie                         false      As easy as httpie /aitch-tee-tee-pie/ Ё?ез Modern command line HTTP client т?? user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc.  https://twitter.com/clihttp 
+33015583   34455048   keras                          false      Deep Learning for humans                                                         
+21872392   246302     awesome-machine-learning       false      A curated list of awesome Machine Learning frameworks, libraries and software.   
