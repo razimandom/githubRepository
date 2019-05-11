@@ -17,6 +17,7 @@ public class GitRepo {
 	private String repoWatcherCount;
 	private String repoScore;
 	private String repoLanguage;
+	private String repoTopic;
 	
 	public int getRepoNo() {
 		return repoNo;
@@ -107,6 +108,12 @@ public class GitRepo {
 	}
 	public void setRepoLanguage(String repoLanguage) {
 		this.repoLanguage = repoLanguage;
+	}
+	public String getRepoTopic() {
+		return repoTopic;
+	}
+	public void setRepoTopic(String repoTopic) {
+		this.repoTopic = repoTopic;
 	}
 	
 	

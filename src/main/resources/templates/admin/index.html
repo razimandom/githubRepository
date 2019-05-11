@@ -68,7 +68,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/repository">Browse</a></li>
         <li><a href="/admin">Admin</a></li>
-        <li><a href="/api">API Documentation</a></li>
+        <li><a href="/repository/doc">API Documentation</a></li>
         <li><a href="https://github.com/razimandom/githubRepository">Source Code</a></li>
         <li><a href="http://razimandom.com/">My Portfolio</a></li>
       </ul>
@@ -83,23 +83,22 @@
 			<div class="col-sm-3">
 				<h3>Search Repository</h3>
 
-				<form action="/admin/repository/search/topic/petronas/language/java">
+ 				<form action="#" th:action="@{/admin}" th:object="${gitForm}" method="post">
 					<div class="form-group">
-						<label for="topic">Topic:</label> <input type="text"
-							class="form-control" id="topic">
+						<label for="topic">Topic:</label> <input type="text" th:field="*{topic}" class="form-control">
 					</div>
 					<div class="form-group">
-						<label for="language">Language:</label> <input type="text"
-							class="form-control" id="language">
+						<label for="language">Language:</label> <input type="text" th:field="*{language}" class="form-control">
 					</div>
 					<button type="submit" class="btn btn-success">Search</button>
 				</form>
 				<br>
 				<div class="alert alert-success">
-				Search Topic : <span th:text="${topic != null} ? ${topic} : '' " /><br>
-				Search Language : <span th:text="${language != null} ? ${language} : '' " />
+				Search Topic : <span th:text="${gitForm.topic != null} ? ${gitForm.topic} : '' " /><br>
+				Search Language : <span th:text="${gitForm.language != null} ? ${gitForm.language} : '' " />
 				</div>
 				
+				<!-- 
 				
 				<p>Sample Topic: </p>
 				<table>
@@ -152,7 +151,11 @@
 					</tr>
 				</table>
 
+			 -->
+
 			</div>
+			
+			
 
 			<div class="col-sm-9">
 
@@ -170,7 +173,6 @@
 							<th>Id</th>
 							<th>Name</th>
 							<th>Language</th>
-							<!-- <th>repoDescription</th> -->
 							<th>URL</th>
 							<th>Owner Id</th>
 						</tr>
@@ -178,16 +180,13 @@
 							<td th:text="${count.repoId}"></td>
 							<td th:text="${count.repoName}"></td>
 							<td th:text="${count.repoLanguage}"></td>
-							<!-- <td th:text="${count.repoDescription}"></td> -->
-							<!-- <td th:text="${count.repoURL}"></td> -->
 							<td><a th:href="${count.repoURL}">View Repository</a></td>
 							<td th:text="${count.repoOwnerId}"></td>
 						</tr>
 					</table>
 
-						<form action="/admin/repository/file/admin-report.txt">
-							<button type="submit" class="btn btn-success">Download
-								Records</button>
+						<form action="/admin/repository/file/admin-report.xls">
+							<button type="submit" class="btn btn-success">Download Records XLS</button>
 						</form>
 						<br>
 						<p>Summary:</p>

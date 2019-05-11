@@ -1,6 +1,7 @@
 package com.raziman.petronas.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +10,9 @@ import java.util.TreeMap;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,35 +30,43 @@ public class AdminService {
 	
 	public void generateReportFile(List<GitRepo> repoObjList) {
 		
-		try {
-			try (FileWriter file = new FileWriter(new File("/home/ec2-user/report", "admin-report.txt"))) {
+        try {
+        	
+//            String filename = "F:/Workspace - Eclipse/petronas/src/main/resources/templates/report/admin-report.xls" ;
+        	String filename = "/home/ec2-user/report/admin-report.xls" ;
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("FirstSheet");  
+            
+            HSSFRow rowhead = sheet.createRow((short)0);
+            rowhead.createCell(0).setCellValue("No.");
+            rowhead.createCell(1).setCellValue("Id");
+            rowhead.createCell(2).setCellValue("Name");
+            rowhead.createCell(3).setCellValue("Language");
+            rowhead.createCell(4).setCellValue("URL");
+            rowhead.createCell(5).setCellValue("Owner Id");
+            
+			for (int x = 0; x < repoObjList.size(); x++) {
+				
+	            HSSFRow row = sheet.createRow((short)x+1);
+	            row.createCell(0).setCellValue(x+1);
+	            row.createCell(1).setCellValue(repoObjList.get(x).getRepoId());
+	            row.createCell(2).setCellValue(repoObjList.get(x).getRepoName());
+	            row.createCell(3).setCellValue(repoObjList.get(x).getRepoLanguage());
+	            row.createCell(4).setCellValue(repoObjList.get(x).getRepoURL());
+	            row.createCell(5).setCellValue(repoObjList.get(x).getRepoOwnerId());
 
-				String reportHeader = String.format(
-						"%-5s %-10s %-50s %-15s %-80s %-10s %n %n", 
-						"No", "Id", "Name","Language", "URL", "Owner Id");
-
-				file.write(reportHeader);
-
-				for (int x = 0; x < repoObjList.size(); x++) {
-
-					String reportOutput = String.format("%-5d %-10s %-50s %-15s %-80s %-10s %n",
-							x+1,
-							repoObjList.get(x).getRepoId(), 
-							repoObjList.get(x).getRepoName(),
-							repoObjList.get(x).getRepoLanguage(),
-							repoObjList.get(x).getRepoURL(),
-							repoObjList.get(x).getRepoOwnerId()
-							);
-
-					file.write(reportOutput);
-
-				}
 
 			}
-		} catch (IOException e) {
 
-			e.printStackTrace();
-		}
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            workbook.write(fileOut);
+            fileOut.close();
+            workbook.close();
+            log.info("Excel file has been generated!");
+            
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
 		
 	}
 	

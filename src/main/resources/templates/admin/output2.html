@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Result</h1>
+    <p th:text="'id: ' + ${gitForm.topic}" />
+    <p th:text="'content: ' + ${gitForm.language}" />
+    <a href="/admin/search">Submit another message</a>
+    
+    			<div class="col-sm-9">
+
+
+				<h3>
+					<p>Records Found : <span th:text="${count != null} ? ${count} : '' " /></p>
+				</h3>
+				
+				<p><span th:text="${count == null} ? 'Search repository by using Search Repository section' : '' " /></p>
+				
+				<div th:if="${not #lists.isEmpty(repoListContainer)}">
+					<table class="table">
+						<tr>
+
+							<th>Id</th>
+							<th>Name</th>
+							<th>Language</th>
+							<th>URL</th>
+							<th>Owner Id</th>
+						</tr>
+						<tr th:each="count : ${repoListContainer}">
+							<td th:text="${count.repoId}"></td>
+							<td th:text="${count.repoName}"></td>
+							<td th:text="${count.repoLanguage}"></td>
+							<td><a th:href="${count.repoURL}">View Repository</a></td>
+							<td th:text="${count.repoOwnerId}"></td>
+						</tr>
+					</table>
+
+						<form action="/admin/repository/file/admin-report.xls">
+							<button type="submit" class="btn btn-success">Download Records XLS</button>
+						</form>
+						<br>
+						<p>Summary:</p>
+					
+					<table class="table">
+						<tr>
+							<th>Attribute</th>
+							<th>Value</th>
+							<th>Repository Name</th>
+						</tr>
+						<tr>
+							<td>Top Score</td>
+							<td th:text="${topScore}"></td>
+							<td th:text="${topScoreRepoName}"></td>
+						</tr>
+						<tr>
+							<td>Top Watcher</td>
+							<td th:text="${topWatcherCount}"></td>
+							<td th:text="${topWatcherCountRepoName}"></td>
+						</tr>
+						<tr>
+							<td>Latest Created Date</td>
+							<td th:text="${latestCreatedDate}" /></td>
+							<td th:text="${latestCreatedDateRepoName}" /></td>
+						</tr>
+						<tr>
+							<td>Latest Updated Date</td>
+							<td th:text="${latestUpdatedDate}" /></td>
+							<td th:text="${latestUpdatedDateRepoName}" /></td>
+						</tr>
+						<tr>
+							<td>Latest Pushed Date</td>
+							<td th:text="${latestPushedDate}" /></td>
+							<td th:text="${latestPushedDateRepoName}" /></td>
+						</tr>
+					</table>
+
+					</div>
+
+
+					<br>
+
+					</div>
+    
+    
+</body>
+</html>
