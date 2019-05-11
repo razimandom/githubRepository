@@ -68,6 +68,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/repository">Browse</a></li>
         <li><a href="/admin">Admin</a></li>
+        <li><a href="/api">API Documentation</a></li>
         <li><a href="https://github.com/razimandom/githubRepository">Source Code</a></li>
         <li><a href="http://razimandom.com/">My Portfolio</a></li>
       </ul>
@@ -81,12 +82,6 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<h3>Search Repository</h3>
-				<!--      <p>Search Repository</p> -->
-
-				<!-- <form method="post" th:action="@{/repository/search/topic/__${topic}__}">
- <input type="text" name="topic" id="topic" placeholder="topic"/>
-<button type="submit" class="btn btn-success">Get Details</button>
-</form> -->
 
 				<form action="/repository/search/topic/petronas/language/java">
 					<div class="form-group">
@@ -100,27 +95,6 @@
 					<button type="submit" class="btn btn-success">Search</button>
 				</form>
 
-				<!--  		<form th:action="@{/repository/search}" th:object="${GitRepo}" method="post">
-		    <button type="submit">Delete</button>
-		</form> -->
-
-				<!--       <form:form method = "POST" action = "/repository/search/topic/{topic}">
-         <table>
-            <tr>
-              <td><form:label path = "topic"/>topic</form:label></td>
-              <td><form:input path = "topic"/></td>
-            </tr>
-            <tr>
-              <td>< </td>
-              <td><form:hidden path = "id" value = "1" /></td>
-            </tr>
-            <tr>
-              <td colspan = "2">
-                  <input type = "submit" value = "Submit"/>
-              </td>
-            </tr>
-         </table>  
-      </form:form> -->
 				<br>
 				<div class="alert alert-success">
 				Search Topic : <span th:text="${topic != null} ? ${topic} : '' " /><br>

@@ -84,32 +84,55 @@
 </div>
 
 <!-- Second Container -->
-<div class="container-fluid bg-2 text-center">
-  <h3 class="margin">About Projects</h3>
-  <p>Search github repository by using github API. This project contains public and admin view.</p><br>
-  <a href="/repository"><img src="../static/images/user.png" width="200" th:src="@{images/user.png}" /></a>
-  <a href="/admin"><img src="../static/images/admin.png" width="200" th:src="@{images/admin.png}" /></a>
-  <a href="https://github.com/razimandom/githubRepository"><img src="../static/images/github.png" width="200" th:src="@{images/github.png}" /></a>
-</div>
-
-<!-- Third Container (Grid) -->
-<div class="container-fluid bg-3 text-center">    
-  <h3 class="margin">Requirements</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <p>Tech Used</p>
-      <p>Java 8, Spring Boot, Bootstrap 3, AWS</p>
-    </div>
-    <div class="col-sm-4"> 
-      <p>Admin Requirement</p>
-      <p>Login page, download search record, summary of record</p>
-      <p>Admin login: user=admin password=123</p>
-    </div>
-    <div class="col-sm-4"> 
-      <p>User requirement</p>
-      <p>Search repository by topic, search repository by language, display records in table with pagination</p>
-    </div>
-  </div>
+<div class="container-fluid bg-2">
+		<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+			<h3>API Documentation</h3>
+	<p>Below are API that has been created for this project.</p>
+	
+	<h2>Public API</h2>
+	<p>Format:</p>
+	<p>http://localhost:8080/repository/search/topic/{topic}/language/{language}/page/{page}/per_page/{per_page}</p>
+	<p>http://localhost:8080/repository/search/topic/{topic}/language/{language}/page/{page}</p>
+	<p>http://localhost:8080/repository/search/topic/{topic}/language/{language}</p>
+	<p>http://localhost:8080/repository/search/topic/{topic}</p>
+	<p>http://localhost:8080/repository/search/language/{language}</p><br>
+	
+	<p>Example:</p>
+	<p>http://localhost:8080/repository/search/topic/google/language/java/page/1/per_page/200</p>
+	<p>http://localhost:8080/repository/search/topic/google/language/java/page/2/per_page/200</p>
+	<p>http://localhost:8080/repository/search/topic/google/language/java/page/1</p>
+	<p>http://localhost:8080/repository/search/topic/google/language/java/page/2</p>
+	<p>http://localhost:8080/repository/search/topic/google/language/java</p>
+	<p>http://localhost:8080/repository/search/topic/google/page/1</p>
+	<p>http://localhost:8080/repository/search/topic/google/page/2</p>
+	<p>http://localhost:8080/repository/search/language/java/page/1</p>
+	<p>http://localhost:8080/repository/search/language/java/page/2</p>
+	<br>
+	
+	<h2>Admin API</h2>
+	<p>Format:</p>
+	<p>http://localhost:8080/admin/repository/search/topic/{topic}/language/{language}/page/{page}/per_page/{per_page}</p>
+	<p>http://localhost:8080/admin/repository/search/topic/{topic}/language/{language}/page/{page}</p>
+	<p>http://localhost:8080/admin/repository/search/topic/{topic}/language/{language}</p>
+	<p>http://localhost:8080/admin/repository/search/topic/{topic}</p>
+	<p>http://localhost:8080/admin/repository/search/language/{language}</p><br>
+	
+	<p>Example:</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/language/java/page/1/per_page/200</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/language/java/page/2/per_page/200</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/language/java/page/1</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/language/java/page/2</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/language/java</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/page/1</p>
+	<p>http://localhost:8080/admin/repository/search/topic/google/page/2</p>
+	<p>http://localhost:8080/admin/repository/search/language/java/page/1</p>
+	<p>http://localhost:8080/admin/repository/search/language/java/page/2</p>
+	</div>
+	</div>
+	</div>
+  
 </div>
 
 <!-- Footer -->

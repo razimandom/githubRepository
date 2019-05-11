@@ -6,8 +6,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.raziman.petronas.model.GitConnection;
 import com.raziman.petronas.response.GitPublicResponse;
+import com.raziman.petronas.service.ApiCallService;
 import com.raziman.petronas.service.RepoService;
 
 @Controller
@@ -29,10 +29,10 @@ public class PublicController {
     @RequestMapping("")
     public String viewRepository() throws Exception{
         return "repository/index";
-        
     }
 
     @RequestMapping({
+    	"/search/topic/{topic}/language/{language}/page/{page}/per_page/{per_page}",
     	"/search/topic/{topic}/language/{language}/page/{page}",
     	"/search/topic/{topic}/language/{language}",
     	"/search",
@@ -41,23 +41,17 @@ public class PublicController {
     		@PathVariable(name = "topic", required = false) String topicVar, 
     		@PathVariable(name = "language", required = false) String languageVar,
     		@PathVariable(name = "page", required = false) String pageVar,
+    		@PathVariable(name = "per_page", required = false) String per_pageVar,
     		ModelMap model) throws Exception{
 		
     	String topic = StringUtils.isEmpty(topicVar) ? "githubRepository" : topicVar;
     	String language = StringUtils.isEmpty(languageVar) ? "java" : languageVar;
     	String page = StringUtils.isEmpty(pageVar) ? "1" : pageVar;
-    	
-		GitConnection gitCon = new GitConnection();
-		gitCon.setHostname(hostname);
-		gitCon.setSubURL(subURL);
-		gitCon.setTopic(topic);
-		gitCon.setLanguage(language);
-		gitCon.setPage(page);
-		gitCon.setSortBy(sortBy);
-		gitCon.setSortOrder(sortOrder);
+    	String per_page = StringUtils.isEmpty(per_pageVar) ? "10" : per_pageVar;
     	
 		RepoService repoLogic = new RepoService();
-		GitPublicResponse gitPublicResponse = repoLogic.getRepository(gitCon);
+		ApiCallService apiCallService = new ApiCallService();
+		GitPublicResponse gitPublicResponse = repoLogic.getRepository(apiCallService.createGitConnection(hostname, subURL, topic, language, page, sortBy, sortOrder, per_page));
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
@@ -68,6 +62,7 @@ public class PublicController {
     }
     
     @RequestMapping({
+    	"/search/language/{language}/page/{page}/per_page/{per_page}",
     	"/search/language/{language}/page/{page}",
     	"/search/language/{language}",
     	"/search/language"
@@ -75,23 +70,17 @@ public class PublicController {
     public String doViewRepoByLanguage(
     		@PathVariable(name = "language", required = false) String languageVar,
     		@PathVariable(name = "page", required = false) String pageVar,
+    		@PathVariable(name = "per_page", required = false) String per_pageVar,
     		ModelMap model) throws Exception{
 		
     	String topic = null;
     	String language = StringUtils.isEmpty(languageVar) ? "java" : languageVar;
     	String page = StringUtils.isEmpty(pageVar) ? "1" : pageVar;
-    	
-		GitConnection gitCon = new GitConnection();
-		gitCon.setHostname(hostname);
-		gitCon.setSubURL(subURL);
-		gitCon.setTopic(topic);
-		gitCon.setLanguage(language);
-		gitCon.setPage(page);
-		gitCon.setSortBy(sortBy);
-		gitCon.setSortOrder(sortOrder);
+    	String per_page = StringUtils.isEmpty(per_pageVar) ? "10" : per_pageVar;
     	
 		RepoService repoLogic = new RepoService();
-		GitPublicResponse gitPublicResponse = repoLogic.getRepository(gitCon);
+		ApiCallService apiCallService = new ApiCallService();
+		GitPublicResponse gitPublicResponse = repoLogic.getRepository(apiCallService.createGitConnection(hostname, subURL, topic, language, page, sortBy, sortOrder, per_page));
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
@@ -102,6 +91,7 @@ public class PublicController {
     }
     
     @RequestMapping({
+    	"/search/topic/{topic}/page/{page}/per_page/{per_page}",
     	"/search/topic/{topic}/page/{page}",
     	"/search/topic/{topic}",
     	"/search/topic"
@@ -109,23 +99,17 @@ public class PublicController {
     public String doViewRepoByTopic(
     		@PathVariable(name = "topic", required = false) String topicVar,
     		@PathVariable(name = "page", required = false) String pageVar,
+    		@PathVariable(name = "per_page", required = false) String per_pageVar,
     		ModelMap model) throws Exception{
 		
     	String topic = StringUtils.isEmpty(topicVar) ? "githubRepository" : topicVar;
     	String language = null;
     	String page = StringUtils.isEmpty(pageVar) ? "1" : pageVar;
-    	
-		GitConnection gitCon = new GitConnection();
-		gitCon.setHostname(hostname);
-		gitCon.setSubURL(subURL);
-		gitCon.setTopic(topic);
-		gitCon.setLanguage(language);
-		gitCon.setPage(page);
-		gitCon.setSortBy(sortBy);
-		gitCon.setSortOrder(sortOrder);
+    	String per_page = StringUtils.isEmpty(per_pageVar) ? "10" : per_pageVar;
     	
 		RepoService repoLogic = new RepoService();
-		GitPublicResponse gitPublicResponse = repoLogic.getRepository(gitCon);
+		ApiCallService apiCallService = new ApiCallService();
+		GitPublicResponse gitPublicResponse = repoLogic.getRepository(apiCallService.createGitConnection(hostname, subURL, topic, language, page, sortBy, sortOrder, per_page));
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);

@@ -10,13 +10,27 @@ import javax.net.ssl.HttpsURLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import com.raziman.petronas.model.GitConnection;
 
 @Service
 public class ApiCallService {
 	
 	private static final Logger log = LoggerFactory.getLogger(ApiCallService.class);
+	
+	public GitConnection createGitConnection(String hostname, String subURL, String topic, String language, String page, String sortBy, String sortOrder, String per_page) {
+		
+		GitConnection gitCon = new GitConnection();
+		gitCon.setHostname(hostname);
+		gitCon.setSubURL(subURL);
+		gitCon.setTopic(topic);
+		gitCon.setLanguage(language);
+		gitCon.setPage(page);
+		gitCon.setSortBy(sortBy);
+		gitCon.setSortOrder(sortOrder);
+		gitCon.setPer_page(per_page);
+		
+		return gitCon;
+	}
 
 	public HttpsURLConnection callAPI(GitConnection gitCon) throws Exception {
 
@@ -103,16 +117,17 @@ public class ApiCallService {
 		String sortBy = gitCon.getSortBy();
 		String sortOrder = gitCon.getSortOrder();
 		String page = gitCon.getPage();
+		String per_page = gitCon.getPer_page();
 		
 		if (topic==null) {
-			return new URL(hostname + subURL + "?q=language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=10");
+			return new URL(hostname + subURL + "?q=language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=" + per_page);
 		}
 		
 		if (language==null) {
-			return new URL(hostname + subURL + "?q="+ topic + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=10");
+			return new URL(hostname + subURL + "?q="+ topic + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=" + per_page);
 		}
 		
-		return new URL(hostname + subURL + "?q=" + topic + "+language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=10");
+		return new URL(hostname + subURL + "?q=" + topic + "+language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=" + per_page);
 	}
 
 }

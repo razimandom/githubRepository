@@ -11,7 +11,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.raziman.petronas.map.GitRepoMapping;
@@ -28,7 +27,7 @@ public class AdminService {
 	public void generateReportFile(List<GitRepo> repoObjList) {
 		
 		try {
-			try (FileWriter file = new FileWriter(new File("src\\main\\resources\\templates\\report", "admin-report.txt"))) {
+			try (FileWriter file = new FileWriter(new File("/home/ec2-user/report", "admin-report.txt"))) {
 
 				String reportHeader = String.format(
 						"%-5s %-10s %-50s %-15s %-80s %-10s %n %n", 

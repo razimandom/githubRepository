@@ -10,6 +10,7 @@ public class GitConnection {
 	private String sortOrder;
 	private String page;
 	private String repoOwnerId;
+	private String per_page;
 	
 	public String getHostname() {
 		return hostname;
@@ -58,6 +59,12 @@ public class GitConnection {
 	}
 	public void setRepoOwnerId(String repoOwnerId) {
 		this.repoOwnerId = repoOwnerId;
+	}
+	public String getPer_page() {
+		return per_page;
+	}
+	public void setPer_page(String per_page) {
+		this.per_page = per_page;
 	}
 
 	

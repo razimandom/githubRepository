@@ -1,6 +1,7 @@
 package com.raziman.petronas.controller;
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.raziman.petronas.model.GitConnection;
 import com.raziman.petronas.model.GitReport;
 import com.raziman.petronas.response.GitAdminResponse;
 import com.raziman.petronas.service.AdminService;
+import com.raziman.petronas.service.ApiCallService;
 import com.raziman.petronas.service.FileStorageService;
 
 @Controller
@@ -52,6 +53,7 @@ public class AdminController {
     }
     
     @RequestMapping({
+    	"/repository/search/topic/{topic}/language/{language}/page/{page}/per_page/{per_page}",
     	"/repository/search/topic/{topic}/language/{language}/page/{page}",
     	"/repository/search/topic/{topic}/language/{language}",
     	"/repository/search",
@@ -60,23 +62,17 @@ public class AdminController {
     		@PathVariable(name = "topic", required = false) String topicVar, 
     		@PathVariable(name = "language", required = false) String languageVar,
     		@PathVariable(name = "page", required = false) String pageVar,
+    		@PathVariable(name = "per_page", required = false) String per_pageVar,
     		ModelMap model) throws Exception{
 		
     	String topic = StringUtils.isEmpty(topicVar) ? "githubRepository" : topicVar;
     	String language = StringUtils.isEmpty(languageVar) ? "java" : languageVar;
     	String page = StringUtils.isEmpty(pageVar) ? "1" : pageVar;
-    	
-		GitConnection gitCon = new GitConnection();
-		gitCon.setHostname(hostname);
-		gitCon.setSubURL(subURL);
-		gitCon.setTopic(topic);
-		gitCon.setLanguage(language);
-		gitCon.setPage(page);
-		gitCon.setSortBy(sortBy);
-		gitCon.setSortOrder(sortOrder);
+    	String per_page = StringUtils.isEmpty(per_pageVar) ? "10" : per_pageVar;
     	
 		AdminService adminService = new AdminService();
-		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(gitCon);
+		ApiCallService apiCallService = new ApiCallService();
+		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(apiCallService.createGitConnection(hostname, subURL, topic, language, page, sortBy, sortOrder, per_page));
 
         createReportValue(model, gitAdminResponse.getReport());
 		
@@ -90,6 +86,7 @@ public class AdminController {
     
     
     @RequestMapping({
+    	"/repository/search/topic/{topic}/page/{page}/per_page/{per_page}",
     	"/repository/search/topic/{topic}/page/{page}",
     	"/repository/search/topic/{topic}",
     	"/repository/search/topic"
@@ -97,23 +94,17 @@ public class AdminController {
     public String doAdminViewRepoByTopic(
     		@PathVariable(name = "topic", required = false) String topicVar, 
     		@PathVariable(name = "page", required = false) String pageVar,
+    		@PathVariable(name = "per_page", required = false) String per_pageVar,
     		ModelMap model) throws Exception{
 		
     	String topic = StringUtils.isEmpty(topicVar) ? "githubRepository" : topicVar;
     	String language = null;
     	String page = StringUtils.isEmpty(pageVar) ? "1" : pageVar;
-    	
-		GitConnection gitCon = new GitConnection();
-		gitCon.setHostname(hostname);
-		gitCon.setSubURL(subURL);
-		gitCon.setTopic(topic);
-		gitCon.setLanguage(language);
-		gitCon.setPage(page);
-		gitCon.setSortBy(sortBy);
-		gitCon.setSortOrder(sortOrder);
+    	String per_page = StringUtils.isEmpty(per_pageVar) ? "10" : per_pageVar;
     	
 		AdminService adminService = new AdminService();
-		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(gitCon);
+		ApiCallService apiCallService = new ApiCallService();
+		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(apiCallService.createGitConnection(hostname, subURL, topic, language, page, sortBy, sortOrder, per_page));
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
@@ -125,7 +116,8 @@ public class AdminController {
         return "admin/index";
     }
     
-    @RequestMapping({    	
+    @RequestMapping({
+    	"/repository/search/language/{language}/page/{page}/per_page/{per_page}",
     	"/repository/search/language/{language}/page/{page}",
     	"/repository/search/language/{language}",
     	"/repository/search/language"	
@@ -133,23 +125,18 @@ public class AdminController {
     public String doAdminViewRepoByLanguage(
     		@PathVariable(name = "language", required = false) String languageVar,
     		@PathVariable(name = "page", required = false) String pageVar,
+    		@PathVariable(name = "per_page", required = false) String per_pageVar,
     		ModelMap model) throws Exception{
 		
     	String topic = null;
     	String language = StringUtils.isEmpty(languageVar) ? "java" : languageVar;
     	String page = StringUtils.isEmpty(pageVar) ? "1" : pageVar;
+    	String per_page = StringUtils.isEmpty(per_pageVar) ? "10" : per_pageVar;
     	
-		GitConnection gitCon = new GitConnection();
-		gitCon.setHostname(hostname);
-		gitCon.setSubURL(subURL);
-		gitCon.setTopic(topic);
-		gitCon.setLanguage(language);
-		gitCon.setPage(page);
-		gitCon.setSortBy(sortBy);
-		gitCon.setSortOrder(sortOrder);
     	
 		AdminService adminService = new AdminService();
-		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(gitCon);
+		ApiCallService apiCallService = new ApiCallService();
+		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(apiCallService.createGitConnection(hostname, subURL, topic, language, page, sortBy, sortOrder, per_page));
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
