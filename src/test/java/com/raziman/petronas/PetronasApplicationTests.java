@@ -27,6 +27,7 @@ public class PetronasApplicationTests extends ApiCallService{
 	String topic = "GoSign";
 	String language = "java";
 	String page = "1";
+	String per_page = "10";
 	
 	@Test
 	public void testHttpResponse() throws Exception {
@@ -39,6 +40,7 @@ public class PetronasApplicationTests extends ApiCallService{
 		gitCon.setPage(page);
 		gitCon.setSortBy(sortBy);
 		gitCon.setSortOrder(sortOrder);
+		gitCon.setPer_page(per_page);
 		
 		HttpsURLConnection response = callAPI(gitCon);
 		
@@ -59,6 +61,7 @@ public class PetronasApplicationTests extends ApiCallService{
 		gitCon.setPage(page);
 		gitCon.setSortBy(sortBy);
 		gitCon.setSortOrder(sortOrder);
+		gitCon.setPer_page(per_page);
 		
 		HttpsURLConnection response = callAPI(gitCon);
 		GitRepoMapping repoMap = new GitRepoMapping();
