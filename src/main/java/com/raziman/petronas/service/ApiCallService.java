@@ -26,7 +26,7 @@ public class ApiCallService {
 
 			URL url = getURL(gitCon);
 
-			System.out.println("URL: " + url);
+			log.info("*** API STATUS: Execute URL: " + url);
 
 			con = (HttpsURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -56,9 +56,9 @@ public class ApiCallService {
 		try {
 			
 			if (con.getResponseCode() == 200) {
-
-				System.out.println("Response code: " + con.getResponseCode());
-				System.out.println("Response message: " + con.getResponseMessage());
+				
+				log.info("*** API STATUS: Response code: " + con.getResponseCode());
+				log.info("*** API STATUS: Response message: " + con.getResponseMessage());
 
 				input = new DataInputStream(con.getInputStream());
 				StringBuilder responseBody = new StringBuilder();
@@ -95,8 +95,6 @@ public class ApiCallService {
 	}
 	
 	public URL getURL(GitConnection gitCon) throws MalformedURLException {
-		
-//		https://api.github.com/search/repositories?q=language:java
 
 		String hostname = gitCon.getHostname();
 		String subURL = gitCon.getSubURL();
@@ -105,12 +103,6 @@ public class ApiCallService {
 		String sortBy = gitCon.getSortBy();
 		String sortOrder = gitCon.getSortOrder();
 		String page = gitCon.getPage();
-		
-//		if (hostname == null && subURL == null && topic == null && language == null && sortBy == null && sortOrder == null)
-//		throw new Exception("Unable to process! Some of the value is null");
-		
-		System.out.println("topic:" + topic);
-		System.out.println("language:" + language);
 		
 		if (topic==null) {
 			return new URL(hostname + subURL + "?q=language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=10");

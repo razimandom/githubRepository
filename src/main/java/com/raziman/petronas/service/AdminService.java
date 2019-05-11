@@ -3,7 +3,6 @@ package com.raziman.petronas.service;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -19,21 +18,17 @@ import com.raziman.petronas.map.GitRepoMapping;
 import com.raziman.petronas.model.GitConnection;
 import com.raziman.petronas.model.GitRepo;
 import com.raziman.petronas.model.GitReport;
+import com.raziman.petronas.response.GitAdminResponse;
 
 @Service
 public class AdminService {
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminService.class);
 	
-//    @PreAuthorize("hasRole(@roles.ADMIN)")
-//    public boolean ensureAdmin() {
-//        return true;
-//    }
-	
 	public void generateReportFile(List<GitRepo> repoObjList) {
 		
 		try {
-			try (FileWriter file = new FileWriter(new File("src\\main\\resources\\templates\\report", "report.txt"))) {
+			try (FileWriter file = new FileWriter(new File("src\\main\\resources\\templates\\report", "admin-report.txt"))) {
 
 				String reportHeader = String.format(
 						"%-5s %-10s %-50s %-15s %-80s %-10s %n %n", 
@@ -91,18 +86,10 @@ public class AdminService {
 		
 	}
 		
-	public GitReport getAdminReport(GitConnection gitCon) throws Exception {
+	public GitReport getAdminReport(String responseBody) throws Exception {
 		
-		ApiCallService apiCall = new ApiCallService();
 		GitRepoMapping repoMap = new GitRepoMapping();
-		
-		HttpsURLConnection response = apiCall.callAPI(gitCon);
-		
-		if (response.getResponseCode()!=200)
-			throw new Exception("Error generating admin report. Response " + response.getResponseCode() + " " + response.getResponseMessage());
-			
 
-		String responseBody = apiCall.getResponseBody(response);
 		List<GitRepo> repoObjList = repoMap.getRepoListObject(responseBody);
 		
 		Optional<List<GitRepo>> optRepoList = Optional.ofNullable(repoObjList);
@@ -139,7 +126,7 @@ public class AdminService {
 	}
 	
 	
-	public List<GitRepo> getRepositoryAdmin(GitConnection gitCon) throws Exception {
+	public GitAdminResponse getRepositoryAdmin(GitConnection gitCon) throws Exception {
 		
 		ApiCallService apiCall = new ApiCallService();
 		GitRepoMapping repoMap = new GitRepoMapping();
@@ -156,7 +143,10 @@ public class AdminService {
 			if (optRepoList.isPresent()) {
 				generateReportFile(repoObjList);
 				
-				return repoObjList;
+				return new GitAdminResponse(
+						repoMap.getRepoCount(responseBody), 
+						repoMap.getRepoListObject(responseBody),
+						getAdminReport(responseBody));
 			}
 
 		}

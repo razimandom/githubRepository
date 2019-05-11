@@ -1,8 +1,6 @@
 package com.raziman.petronas.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -22,11 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.raziman.petronas.model.GitConnection;
-import com.raziman.petronas.model.GitRepo;
 import com.raziman.petronas.model.GitReport;
+import com.raziman.petronas.response.GitAdminResponse;
 import com.raziman.petronas.service.AdminService;
 import com.raziman.petronas.service.FileStorageService;
-import com.raziman.petronas.service.RepoService;
 
 @Controller
 @RequestMapping("/admin")
@@ -78,17 +75,15 @@ public class AdminController {
 		gitCon.setSortBy(sortBy);
 		gitCon.setSortOrder(sortOrder);
     	
-    	RepoService repoService = new RepoService();
 		AdminService adminService = new AdminService();
-		List<GitRepo> repoList = adminService.getRepositoryAdmin(gitCon);
-		
-        GitReport gitReport = adminService.getAdminReport(gitCon);
-        getSummary(model, gitReport);
+		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(gitCon);
+
+        createReportValue(model, gitAdminResponse.getReport());
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
-        model.addAttribute("count", repoService.getCount(gitCon));
-        model.addAttribute("repoListContainer", repoList);
+        model.addAttribute("count", gitAdminResponse.getCount());
+        model.addAttribute("repoListContainer", gitAdminResponse.getRepoList());
 
         return "admin/index";
     }
@@ -117,17 +112,15 @@ public class AdminController {
 		gitCon.setSortBy(sortBy);
 		gitCon.setSortOrder(sortOrder);
     	
-    	RepoService repoService = new RepoService();
 		AdminService adminService = new AdminService();
-		List<GitRepo> repoList = adminService.getRepositoryAdmin(gitCon);
+		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(gitCon);
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
-        model.addAttribute("count", repoService.getCount(gitCon));
-        model.addAttribute("repoListContainer", repoList);    
-       
-        GitReport gitReport = adminService.getAdminReport(gitCon);
-        getSummary(model, gitReport);
+        model.addAttribute("count", gitAdminResponse.getCount());
+        model.addAttribute("repoListContainer", gitAdminResponse.getRepoList());    
+
+        createReportValue(model, gitAdminResponse.getReport());
 
         return "admin/index";
     }
@@ -155,17 +148,15 @@ public class AdminController {
 		gitCon.setSortBy(sortBy);
 		gitCon.setSortOrder(sortOrder);
     	
-    	RepoService repoService = new RepoService();
 		AdminService adminService = new AdminService();
-		List<GitRepo> repoList = adminService.getRepositoryAdmin(gitCon);
+		GitAdminResponse gitAdminResponse = adminService.getRepositoryAdmin(gitCon);
 		
         model.addAttribute("topic", topic);
         model.addAttribute("language", language);
-        model.addAttribute("count", repoService.getCount(gitCon));
-        model.addAttribute("repoListContainer", repoList);
+        model.addAttribute("count", gitAdminResponse.getCount());
+        model.addAttribute("repoListContainer", gitAdminResponse.getRepoList());
         
-        GitReport gitReport = adminService.getAdminReport(gitCon);
-        getSummary(model, gitReport);
+        createReportValue(model, gitAdminResponse.getReport());
 
         return "admin/index";
     }
@@ -200,7 +191,7 @@ public class AdminController {
               .body(resource);
   }
   
-  public void getSummary(ModelMap model, GitReport gitReport) {
+  public void createReportValue(ModelMap model, GitReport gitReport) {
       
       model.addAttribute("topScore", gitReport.getTopScore());
       model.addAttribute("topScoreRepoName", gitReport.getTopScoreRepoName());

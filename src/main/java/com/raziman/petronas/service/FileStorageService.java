@@ -1,11 +1,14 @@
 package com.raziman.petronas.service;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.raziman.petronas.controller.AdminController;
 import com.raziman.petronas.exception.FileStorageException;
 import com.raziman.petronas.exception.MyFileNotFoundException;
+import com.raziman.petronas.model.GitRepo;
 import com.raziman.petronas.properties.FileStorageProperties;
 
 @Component
@@ -34,7 +38,7 @@ public class FileStorageService {
     public FileStorageService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
-
+        
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
@@ -78,4 +82,39 @@ public class FileStorageService {
             throw new MyFileNotFoundException("File not found " + fileName, ex);
         }
     }
+    
+	public void generateReportFile(List<GitRepo> repoObjList) {
+		
+		try {
+			try (FileWriter file = new FileWriter(new File(fileStorageLocation.toString(), "admin-report.txt"))) {
+
+				String reportHeader = String.format(
+						"%-5s %-10s %-50s %-15s %-80s %-10s %n %n", 
+						"No", "Id", "Name","Language", "URL", "Owner Id");
+
+				file.write(reportHeader);
+
+				for (int x = 0; x < repoObjList.size(); x++) {
+
+					String reportOutput = String.format("%-5d %-10s %-50s %-15s %-80s %-10s %n",
+							x+1,
+							repoObjList.get(x).getRepoId(), 
+							repoObjList.get(x).getRepoName(),
+							repoObjList.get(x).getRepoLanguage(),
+							repoObjList.get(x).getRepoURL(),
+							repoObjList.get(x).getRepoOwnerId()
+							);
+
+					file.write(reportOutput);
+
+				}
+
+			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
+    
 }

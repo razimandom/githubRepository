@@ -1,12 +1,12 @@
 RepoId     OwnerId    RepoName                       Private    RepoDescription                                                                  
  
-21289110   652070     awesome-python                 false      A curated list of awesome Python frameworks, libraries, software and resources   
-83222441   5458997    system-design-primer           false      Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards. 
-54346799   1655968    public-apis                    false      A collective list of free APIs for use in software and web development.          
-51117837   15658638   models                         false      Models and examples built with TensorFlow                                        
-1039520    48381040   youtube-dl                     false      Command-line program to download videos from YouTube.com and other video sites   
-596892     16748505   flask                          false      The Python micro framework for building web applications.                        
-33614304   1114542    thefuck                        false      Magnificent app which corrects your previous console command.                    
-3544424    326885     httpie                         false      As easy as httpie /aitch-tee-tee-pie/ Ё?ез Modern command line HTTP client т?? user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc.  https://twitter.com/clihttp 
-33015583   34455048   keras                          false      Deep Learning for humans                                                         
-21872392   246302     awesome-machine-learning       false      A curated list of awesome Machine Learning frameworks, libraries and software.   
+1797189    678061     petronas                       false      Distributed File System in user space. Initial prototyping in Java.              
+173159476  41185222   petronasTest                   false      Petronas ICT Skill Test                                                          
+186027688  15053466   Petronas                       false      Site Petronas                                                                    
+111879344  18523105   booklet                        false      PETRONAS Custodian Booklet                                                       
+41302244   13944632   Cuao1                          false      Petronas sfa by cuao                                                             
+147287481  31095979   petrolv2                       false      Petronas Bukit Bunga                                                             
+167253884  35354796   petrotheme                     false      Package build for PETRONAS presentations with R                                  
+179406454  31603758   wss                            false      WSS configurations for Khazanah and PETRONAS                                     
+113795179  19891790   petronas1                      false      petronas1's project                                                              
+125383929  7012611    petronas-production            false      A source code for petronas production                                            

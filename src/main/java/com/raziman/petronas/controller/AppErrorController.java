@@ -27,6 +27,9 @@ public class AppErrorController implements ErrorController  {
 	        else if(statusCode == HttpStatus.UNAUTHORIZED.value()) {
 	            return "/error/error-401";
 	        }
+	        else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+	            return "/error/error-500";
+	        }
 	    }
 	    return "error";
 	}
