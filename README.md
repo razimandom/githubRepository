@@ -44,6 +44,7 @@ Password: 123
 1. Get response code 200 with valid topic and valid language
 2. Get response code 200 with null topic and valid language
 3. Get response code 200 with valid topic and null language
+4. Get count must >=0
 
 <b>Technologies:</b>
 1. Java 8
