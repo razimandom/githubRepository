@@ -141,7 +141,7 @@ public class ApiCallService {
 			return new URL(hostname + subURL + "?q=" + topic + "&sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
 		}
 		
-		log.info("Language & topic not nul");
+		log.info("Language & topic not null");
 		return new URL(hostname + subURL + "?q=" + topic + "+language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
 	}
 
