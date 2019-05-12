@@ -84,7 +84,7 @@
 				<h3>Search Repository</h3>
 
  				<!-- <form action="#" th:action="@{/repository(pageSize=20, page=1)}" th:object="${gitForm}" method="post"> -->
- 				<form action="#" th:action="@{/repository/list(page=1)}" th:object="${gitForm}" method="post">
+ 				<form action="#" th:action="@{/repository(page=1)}" th:object="${gitForm}" method="post">
 					<div class="form-group">
 						<label for="topic">Topic:</label> <input type="text" th:field="*{topic}" class="form-control">
 					</div>
@@ -99,6 +99,57 @@
 				Search Language : <span th:text="${gitForm.language != null} ? ${gitForm.language} : '' " />
 				</div>
 
+<!-- 				<p>Sample Topic: </p>
+				<table>
+					<tr>
+						<form action="/repository/search/topic/petronas">
+							<button type="submit" class="btn btn-warning">Petronas</button>
+						</form>
+						<form action="/repository/search/topic/shell">
+							<button type="submit" class="btn btn-warning">Shell</button>
+						</form>
+						<form action="/repository/search/topic/caltex">
+							<button type="submit" class="btn btn-warning">Caltex</button>
+						</form>
+						<form action="/repository/search/topic/esso">
+							<button type="submit" class="btn btn-warning">ESSO</button>
+						</form>
+						<form action="/repository/search/topic/google">
+							<button type="submit" class="btn btn-warning">Google</button>
+						</form>
+						<form action="/repository/search/topic/interview">
+							<button type="submit" class="btn btn-warning">Interview</button>
+						</form>
+					</tr>
+				</table>
+				<br>
+				<p>Sample Language: </p>
+				<table>
+					<tr>
+						<form action="/repository/search/language/java">
+							<button type="submit" class="btn btn-info">Java</button>
+						</form>
+						<form action="/repository/search/language/python">
+							<button type="submit" class="btn btn-info">Python</button>
+						</form>
+						<form action="/repository/search/language/go">
+							<button type="submit" class="btn btn-info">Go</button>
+						</form>
+						<form action="/repository/search/language/typescript">
+							<button type="submit" class="btn btn-info">TypeScript</button>
+						</form>
+						<form action="/repository/search/language/html">
+							<button type="submit" class="btn btn-info">HTML</button>
+						</form>
+						<form action="/repository/search/language/c">
+							<button type="submit" class="btn btn-info">C</button>
+						</form>
+						<form action="/repository/search/language/php">
+							<button type="submit" class="btn btn-info">PHP</button>
+						</form>
+					</tr>
+				</table> -->
+
 			</div>
 
 			<div class="col-sm-9">
@@ -110,31 +161,6 @@
 				<p><span th:text="${count == null} ? 'Search repository by using Search Repository section' : '' " /></p>
 				
 					<div th:if="${not #lists.isEmpty(repoListContainer)}">
-					
-<!-- 						<table border="1">
-						    <thead>
-						        <tr>
-						            <th th:text="#{msg.id}" />
-						            <th th:text="#{msg.name}" />
-							<th>Id</th>
-							<th>Name</th>
-							<th>Language</th>
-							<th>repoDescription</th>
-							<th>URL</th>
-							<th>Owner Id</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <tr th:each="repo : ${repoPage.content}">
-						            <td th:text="${repo.repoId}" />
-						            <td th:text="${repo.repoName}" />
-						            <td th:text="${repo.repoLanguage}" />
-						            <td th:text="${repo.repoURL}" />
-						            <td th:text="${repo.repoOwnerId}" />
-						        </tr>
-						    </tbody>
-						</table> -->
-					
 					<table class="table">
 						<tr>
 
@@ -145,21 +171,20 @@
 							<th>URL</th>
 							<th>Owner Id</th>
 						</tr>
-						<tr th:each="repo : ${repoPage.content}">
-							<td th:text="${repo.repoId}"></td>
-							<td th:text="${repo.repoName}"></td>
-							<td th:text="${repo.repoLanguage}"></td>
-							<!-- <td th:text="${repo.repoDescription}"></td> -->
-							<!-- <td th:text="${repo.repoURL}"></td> -->
-							<td><a th:href="${repo.repoURL}">View Repository</a></td>
-							<td th:text="${repo.repoOwnerId}"></td>
+						<tr th:each="count : ${repoListContainer}">
+							<td th:text="${count.repoId}"></td>
+							<td th:text="${count.repoName}"></td>
+							<td th:text="${count.repoLanguage}"></td>
+							<!-- <td th:text="${count.repoDescription}"></td> -->
+							<!-- <td th:text="${count.repoURL}"></td> -->
+							<td><a th:href="${count.repoURL}">View Repository</a></td>
+							<td th:text="${count.repoOwnerId}"></td>
 						</tr>
 					</table>
 					
 				<div th:if="${repoPage.totalPages > 0}" class="pagination"
 				    th:each="pageNumber : ${pageNumbers}">
-				    <!-- <a th:href="@{/repository(page=${pageNumber})}" -->
- 				    <a th:href="@{/repository/list(topic=${gitForm.topic},language=${gitForm.language},page=${pageNumber})}"
+ 				    <a th:href="@{/repository(topic=${gitForm.topic},language=${gitForm.language},page=${pageNumber},)}"
 				        th:text=${pageNumber}
 				        th:class="${pageNumber==repoPage.number + 1} ? active"></a>
 				</div>

@@ -15,9 +15,9 @@ import com.raziman.petronas.model.GitRepo;
 import com.raziman.petronas.response.GitPublicResponse;
 
 @Service
-public class RepoService {
+public class PublicService {
 	
-	private static final Logger log = LoggerFactory.getLogger(RepoService.class);
+	private static final Logger log = LoggerFactory.getLogger(PublicService.class);
 	
 	public GitPublicResponse getRepository(GitConnection gitCon) throws Exception {
 		

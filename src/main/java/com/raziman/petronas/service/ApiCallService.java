@@ -116,18 +116,8 @@ public class ApiCallService {
 		String language = gitCon.getLanguage();
 		String sortBy = gitCon.getSortBy();
 		String sortOrder = gitCon.getSortOrder();
-		String page = gitCon.getPage();
-		String per_page = gitCon.getPer_page();
 		
-		if (topic==null) {
-			return new URL(hostname + subURL + "?q=language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=" + per_page);
-		}
-		
-		if (language==null) {
-			return new URL(hostname + subURL + "?q="+ topic + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=" + per_page);
-		}
-		
-		return new URL(hostname + subURL + "?q=" + topic + "+language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&page=" + page + "&per_page=" + per_page);
+		return new URL(hostname + subURL + "?q=" + topic + "+language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
 	}
 
 }
