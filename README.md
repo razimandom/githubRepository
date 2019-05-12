@@ -3,6 +3,8 @@ Application to search github repository
 
 > This is sample project for job interview technical test. Below guide is for examiner
 
+This project has been uploaded to AWS: http://ec2-54-179-161-149.ap-southeast-1.compute.amazonaws.com:8080/. Due to limitation for free-tier EC2, I will stop the server after 19th May 2019.
+
 <b>How to start?</b>
 1. Make sure your system has java install. run 'java -version' using command prompt to check
 2. Clone this project
@@ -37,3 +39,9 @@ Password: 123
 7. As admin I want to login to view admin page
 8. As admin I want view report of search result
 9. As admin I want download search result
+
+<b>Technologies:</b>
+1. Java 8
+2. Spring framework
+3. Bootstrap 3 (HTML, CSS, JS)
+4. AWS (EC2)
