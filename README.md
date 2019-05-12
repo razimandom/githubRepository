@@ -1,6 +1,8 @@
 # githubRepository
 Application to search github repository
 
+> This is sample project for job interview technical test. Below guide is for examiner
+
 <b>How to start?</b>
 1. Make sure your system has java install. run 'java -version' using command prompt to check
 2. Clone this project
@@ -8,6 +10,15 @@ Application to search github repository
 4. Go to target folder that contain petronas-0.0.1-SNAPSHOT.war file
 5. Run 'java -jar petronas-0.0.1-SNAPSHOT.war' from this folder
 6. Open http://localhost:8080/
+
+<b>How to test?</b>
+
+Spring boot will run test when building the .war file. If you want to run test manually, follow below steps.
+1. Clone this project
+2. Open Eclipse and import project as maven project
+3. Press CTRL+SHIFT+R to search java resource PetronasApplicationTests.java
+4. Open PetronasApplicationTests.java
+5. Right click PetronasApplicationTests.java then run as JUnit Test
 
 <b>Admin credential:</b>
 
