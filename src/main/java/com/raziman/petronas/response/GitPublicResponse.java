@@ -27,6 +27,13 @@ public class GitPublicResponse {
 		this.repoList = repoList;
 	}
 	
+	@Override
+	public String toString() {
+		return "GitPublicResponse [count=" + count + ", repoList=" + repoList + "]";
+	}
+	
+	
+	
 	
 
 }

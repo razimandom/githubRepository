@@ -17,17 +17,15 @@ public class ApiCallService {
 	
 	private static final Logger log = LoggerFactory.getLogger(ApiCallService.class);
 	
-	public GitConnection createGitConnection(String hostname, String subURL, String topic, String language, String page, String sortBy, String sortOrder, String per_page) {
+	public GitConnection createGitConnection(String hostname, String subURL, String topic, String language, String sortBy, String sortOrder) {
 		
 		GitConnection gitCon = new GitConnection();
 		gitCon.setHostname(hostname);
 		gitCon.setSubURL(subURL);
 		gitCon.setTopic(topic);
 		gitCon.setLanguage(language);
-		gitCon.setPage(page);
 		gitCon.setSortBy(sortBy);
 		gitCon.setSortOrder(sortOrder);
-		gitCon.setPer_page(per_page);
 		
 		return gitCon;
 	}
@@ -64,7 +62,9 @@ public class ApiCallService {
 	}
 	
 	public String getResponseBody(HttpsURLConnection con) {
-
+		
+		log.info("*** Method Start " + new Object(){}.getClass().getEnclosingMethod().getName());
+		
 		DataInputStream input = null;
 
 		try {
@@ -82,10 +82,15 @@ public class ApiCallService {
 				while ((c = input.read()) != -1) {
 					responseBody.append((char) c);
 				}
+				
+				log.info("*** Method End " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 				return responseBody.toString();
 
 			} else {
+				
+				log.info("*** Method End " + new Object(){}.getClass().getEnclosingMethod().getName());
+				
 				return Integer.toString(con.getResponseCode());
 
 			}
@@ -103,6 +108,8 @@ public class ApiCallService {
 				}
 			}
 		}
+		
+		log.info("*** Method End " + new Object(){}.getClass().getEnclosingMethod().getName());
 		
 		return null;
 

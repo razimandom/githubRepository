@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,18 +42,12 @@ public class PublicController {
 	@Value("${github.sortOrder}")
 	private String defaultSortOrder;
     
-//    @GetMapping("")
-//    public String viewRepository() throws Exception{
-//        return "repository/index";
-//    }
-    
     @GetMapping("/doc")
     public String viewRepositoryDoc() throws Exception{
         return "repository/doc";
     }
     
-    
-	@GetMapping("")
+	@GetMapping({""})
     public String viewRepository(ModelMap model) {
 		model.addAttribute("gitForm", new GitForm());
         return "repository/index";
@@ -83,16 +76,17 @@ public class PublicController {
 				);
 			
 		GitPublicResponse gitPublicResponse = repoService.getRepository(
-				apiCallService.createGitConnection(hostname, subURL, topic, language, null, sortBy, sortOrder, null));
+				apiCallService.createGitConnection(hostname, subURL, topic, language, sortBy, sortOrder));
+
+		if (gitPublicResponse==null) {
+			return "repository/404";
+		}
 		
         model.addAttribute("count", gitPublicResponse.getCount());
         model.addAttribute("repoListContainer", gitPublicResponse.getRepoList());
         
-//        Page<GitRepo> repoPage = new PageService().findPaginated(PageRequest.of(currentPage - 1, pageSize));
-        
         Page<GitRepo> repoPage = new PageService().findPaginated(PageRequest.of(Integer.parseInt(page)-1, 10), gitPublicResponse.getRepoList());
         
-//        Page<GitRepo> repoPage = new PageImpl<>(gitPublicResponse.getRepoList());
         log.info("Total Repo: " + repoPage.getSize());
         log.info("Total Page: " + repoPage.getTotalPages());
         

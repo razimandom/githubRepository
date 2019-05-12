@@ -21,6 +21,8 @@ public class PublicService {
 	
 	public GitPublicResponse getRepository(GitConnection gitCon) throws Exception {
 		
+		log.info("*** Method Start " + new Object(){}.getClass().getEnclosingMethod().getName());
+		
 		ApiCallService apiCall = new ApiCallService();
 		GitRepoMapping repoMap = new GitRepoMapping();
 		
@@ -34,10 +36,13 @@ public class PublicService {
 			Optional<List<GitRepo>> optRepoList = Optional.ofNullable(repoObjList);
 			
 			if (optRepoList.isPresent()) {
+				log.info("*** Method End " + new Object(){}.getClass().getEnclosingMethod().getName());
+				
 				return new GitPublicResponse(repoMap.getRepoCount(responseBody), repoMap.getRepoListObject(responseBody));
 			}
 
 		}
+		log.error("*** Method End " + new Object(){}.getClass().getEnclosingMethod().getName());
 		
 		return null;
 		

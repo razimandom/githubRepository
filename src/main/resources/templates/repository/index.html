@@ -17,10 +17,13 @@
   }
   p {font-size: 16px;}
   .margin {margin-bottom: 45px;}
+
+  
   .bg-1 { 
     background-color: #1abc9c; /* Green */
     color: #ffffff;
   }
+  
   .bg-2 { 
     background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
@@ -103,37 +106,21 @@
 
 			<div class="col-sm-9">
 
-				<h3>
-					<p>Records Found : <span th:text="${count != null} ? ${count} : '' " /></p>
-				</h3>
+				<h4>
 				
+				<table class="table">
+					<tr>
+					<td>Records Found : <span th:text="${count != null} ? ${count} : '' " /></td>
+					<div th:if="${not #lists.isEmpty(repoListContainer)}">
+					<td align="right">Page <span th:text="${repoPage.number}+1" /> of <span th:text="${repoPage.totalPages}" /> </td>
+					</div>
+					</tr>
+				</table>		
+				</h4>
+
 				<p><span th:text="${count == null} ? 'Search repository by using Search Repository section' : '' " /></p>
 				
 					<div th:if="${not #lists.isEmpty(repoListContainer)}">
-					
-<!-- 						<table border="1">
-						    <thead>
-						        <tr>
-						            <th th:text="#{msg.id}" />
-						            <th th:text="#{msg.name}" />
-							<th>Id</th>
-							<th>Name</th>
-							<th>Language</th>
-							<th>repoDescription</th>
-							<th>URL</th>
-							<th>Owner Id</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <tr th:each="repo : ${repoPage.content}">
-						            <td th:text="${repo.repoId}" />
-						            <td th:text="${repo.repoName}" />
-						            <td th:text="${repo.repoLanguage}" />
-						            <td th:text="${repo.repoURL}" />
-						            <td th:text="${repo.repoOwnerId}" />
-						        </tr>
-						    </tbody>
-						</table> -->
 					
 					<table class="table">
 						<tr>
@@ -141,7 +128,6 @@
 							<th>Id</th>
 							<th>Name</th>
 							<th>Language</th>
-							<!-- <th>repoDescription</th> -->
 							<th>URL</th>
 							<th>Owner Id</th>
 						</tr>
@@ -149,30 +135,27 @@
 							<td th:text="${repo.repoId}"></td>
 							<td th:text="${repo.repoName}"></td>
 							<td th:text="${repo.repoLanguage}"></td>
-							<!-- <td th:text="${repo.repoDescription}"></td> -->
-							<!-- <td th:text="${repo.repoURL}"></td> -->
-							<td><a th:href="${repo.repoURL}">View Repository</a></td>
+							<td><a th:href="${repo.repoURL}">View</a></td>
 							<td th:text="${repo.repoOwnerId}"></td>
+						</tr>
+						<tr>
+						<td colspan="5" align="right" >
+							<div th:if="${repoPage.totalPages > 0}" class="pagination"
+							    th:each="pageNumber : ${pageNumbers}">
+							    <!-- <a th:href="@{/repository(page=${pageNumber})}" -->
+			 				    <a th:href="@{/repository/list(topic=${gitForm.topic},language=${gitForm.language},page=${pageNumber})}"
+							        th:text=${pageNumber}
+							        th:class="${pageNumber==repoPage.number + 1} ? active"></a>
+							</div>
+						</td>
 						</tr>
 					</table>
 					
-				<div th:if="${repoPage.totalPages > 0}" class="pagination"
-				    th:each="pageNumber : ${pageNumbers}">
-				    <!-- <a th:href="@{/repository(page=${pageNumber})}" -->
- 				    <a th:href="@{/repository/list(topic=${gitForm.topic},language=${gitForm.language},page=${pageNumber})}"
-				        th:text=${pageNumber}
-				        th:class="${pageNumber==repoPage.number + 1} ? active"></a>
-				</div>
+
 					
 					
 				</div>
 				
-<!-- 				<div th:if="${repoPage.totalPages > 0}" class="pagination"
-				    th:each="pageNumber : ${pageNumbers}">
- 				    <a th:href="@{/repository(size=${repoPage.size}, page=${pageNumber})}"
-				        th:text=${pageNumber}
-				        th:class="${pageNumber==repoPage.number + 1} ? active"></a>
-				</div> -->
 				
 
 				

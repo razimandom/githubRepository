@@ -117,7 +117,7 @@
 				</table>		
 				</h4>
 				
-				<p><span th:text="${count == null} ? 'Search repository by using Search Repository section' : '' " /></p>
+				<p><span th:text="${count == null} ? 'No records found' : '' " /></p>
 				
 				<div th:if="${not #lists.isEmpty(repoListContainer)}">
 					<table class="table">

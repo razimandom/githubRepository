@@ -20,26 +20,32 @@ public class PageService {
  
     public Page<GitRepo> findPaginated(Pageable pageable, List<GitRepo> gitRepo) {
     	
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<GitRepo> list;
+    	if (gitRepo!=null) {
+    		
+            int pageSize = pageable.getPageSize();
+            int currentPage = pageable.getPageNumber();
+            int startItem = currentPage * pageSize;
+            List<GitRepo> list;
+            
+            log.info("pageSize: " + pageSize);
+            log.info("currentPage: " + (currentPage+1));
+            log.info("gitRepo.size(): " + gitRepo.size());
+            
+            if (gitRepo.size() < startItem) {
+                list = Collections.emptyList();
+            } else {
+                int toIndex = Math.min(startItem + pageSize, gitRepo.size());
+                list = gitRepo.subList(startItem, toIndex);
+            }
+     
+            Page<GitRepo> gitRepoPage
+              = new PageImpl<GitRepo>(list, PageRequest.of(currentPage, pageSize), gitRepo.size());
+    		
+            return gitRepoPage;
+            
+    	}
+    	
+    	return null;
         
-        log.info("pageSize: " + pageSize);
-        log.info("currentPage: " + (currentPage+1));
-        log.info("gitRepo.size(): " + gitRepo.size());
-        
-        if (gitRepo.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, gitRepo.size());
-            list = gitRepo.subList(startItem, toIndex);
-        }
- 
-        Page<GitRepo> gitRepoPage
-          = new PageImpl<GitRepo>(list, PageRequest.of(currentPage, pageSize), gitRepo.size());
-        
- 
-        return gitRepoPage;
     }
 }

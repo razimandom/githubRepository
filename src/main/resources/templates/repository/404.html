@@ -17,10 +17,13 @@
   }
   p {font-size: 16px;}
   .margin {margin-bottom: 45px;}
+
+  
   .bg-1 { 
     background-color: #1abc9c; /* Green */
     color: #ffffff;
   }
+  
   .bg-2 { 
     background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
@@ -83,7 +86,8 @@
 			<div class="col-sm-3">
 				<h3>Search Repository</h3>
 
- 				<form action="#" th:action="@{/admin/list(page=1)}" th:object="${gitForm}" method="post">
+ 				<!-- <form action="#" th:action="@{/repository(pageSize=20, page=1)}" th:object="${gitForm}" method="post"> -->
+ 				<form action="#" th:action="@{/repository/list(page=1)}" th:object="${gitForm}" method="post">
 					<div class="form-group">
 						<label for="topic">Topic:</label> <input type="text" th:field="*{topic}" class="form-control">
 					</div>
@@ -99,11 +103,8 @@
 				</div>
 
 			</div>
-			
-			
 
 			<div class="col-sm-9">
-
 
 				<h4>
 				
@@ -116,10 +117,11 @@
 					</tr>
 				</table>		
 				</h4>
+
+				<p><span th:text="${count == null} ? 'No records found' : '' " /></p>
 				
-				<p><span th:text="${count == null} ? 'Search repository by using Search Repository section' : '' " /></p>
-				
-				<div th:if="${not #lists.isEmpty(repoListContainer)}">
+					<div th:if="${not #lists.isEmpty(repoListContainer)}">
+					
 					<table class="table">
 						<tr>
 
@@ -141,61 +143,24 @@
 							<div th:if="${repoPage.totalPages > 0}" class="pagination"
 							    th:each="pageNumber : ${pageNumbers}">
 							    <!-- <a th:href="@{/repository(page=${pageNumber})}" -->
-			 				    <a th:href="@{/admin/list(topic=${gitForm.topic},language=${gitForm.language},page=${pageNumber})}"
+			 				    <a th:href="@{/repository/list(topic=${gitForm.topic},language=${gitForm.language},page=${pageNumber})}"
 							        th:text=${pageNumber}
 							        th:class="${pageNumber==repoPage.number + 1} ? active"></a>
 							</div>
 						</td>
 						</tr>
 					</table>
-						<form action="/admin/repository/file/admin-report.xls">
-							<button type="submit" class="btn btn-success">Download Records XLS</button>
-						</form>
-						<br>
-						<p>Summary:</p>
 					
-					<table class="table">
-						<tr>
-							<th>Attribute</th>
-							<th>Value</th>
-							<th>Repository Name</th>
-						</tr>
-						<tr>
-							<td>Top Score</td>
-							<td th:text="${topScore}"></td>
-							<td th:text="${topScoreRepoName}"></td>
-						</tr>
-						<tr>
-							<td>Top Watcher</td>
-							<td th:text="${topWatcherCount}"></td>
-							<td th:text="${topWatcherCountRepoName}"></td>
-						</tr>
-						<tr>
-							<td>Latest Created Date</td>
-							<td th:text="${latestCreatedDate}" /></td>
-							<td th:text="${latestCreatedDateRepoName}" /></td>
-						</tr>
-						<tr>
-							<td>Latest Updated Date</td>
-							<td th:text="${latestUpdatedDate}" /></td>
-							<td th:text="${latestUpdatedDateRepoName}" /></td>
-						</tr>
-						<tr>
-							<td>Latest Pushed Date</td>
-							<td th:text="${latestPushedDate}" /></td>
-							<td th:text="${latestPushedDateRepoName}" /></td>
-						</tr>
-					</table>
 
-					</div>
-
-
-					<br>
-
-					</div>
-
-
+					
+					
 				</div>
+				
+				
+
+				
+				
+			</div>
 		</div>
 	</div>
 </div>
