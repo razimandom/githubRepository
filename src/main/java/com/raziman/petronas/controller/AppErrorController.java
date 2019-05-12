@@ -31,7 +31,7 @@ public class AppErrorController implements ErrorController  {
 	            return "error/error-500";
 	        }
 	    }
-	    return "error";
+	    return "/error/error";
 	}
  
     @Override
