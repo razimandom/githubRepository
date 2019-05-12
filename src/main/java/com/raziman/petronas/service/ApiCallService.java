@@ -116,6 +116,8 @@ public class ApiCallService {
 	}
 	
 	public URL getURL(GitConnection gitCon) throws MalformedURLException {
+		
+		log.info(gitCon.toString());
 
 		String hostname = gitCon.getHostname();
 		String subURL = gitCon.getSubURL();
@@ -124,6 +126,22 @@ public class ApiCallService {
 		String sortBy = gitCon.getSortBy();
 		String sortOrder = gitCon.getSortOrder();
 		
+		if (language==null && topic==null) {
+			log.info("Language null topic null");
+			return new URL(hostname + subURL + "?q=sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
+		}
+		
+		if (topic==null) {
+			log.info("Topic null");
+			return new URL(hostname + subURL + "?q=language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
+		}
+		
+		if (language==null) {
+			log.info("Language null");
+			return new URL(hostname + subURL + "?q=" + topic + "&sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
+		}
+		
+		log.info("Language & topic not nul");
 		return new URL(hostname + subURL + "?q=" + topic + "+language:" + language + "&sort=" + sortBy + "&order=" + sortOrder + "&per_page=100");
 	}
 

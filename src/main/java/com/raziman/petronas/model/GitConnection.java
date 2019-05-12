@@ -8,9 +8,7 @@ public class GitConnection {
 	private String language;
 	private String sortBy;
 	private String sortOrder;
-	private String page;
 	private String repoOwnerId;
-	private String per_page;
 	
 	public String getHostname() {
 		return hostname;
@@ -48,23 +46,17 @@ public class GitConnection {
 	public void setSortOrder(String sortOrder) {
 		this.sortOrder = sortOrder;
 	}
-	public String getPage() {
-		return page;
-	}
-	public void setPage(String page) {
-		this.page = page;
-	}
 	public String getRepoOwnerId() {
 		return repoOwnerId;
 	}
 	public void setRepoOwnerId(String repoOwnerId) {
 		this.repoOwnerId = repoOwnerId;
 	}
-	public String getPer_page() {
-		return per_page;
-	}
-	public void setPer_page(String per_page) {
-		this.per_page = per_page;
+	
+	@Override
+	public String toString() {
+		return "GitConnection [hostname=" + hostname + ", subURL=" + subURL + ", topic=" + topic + ", language="
+				+ language + ", sortBy=" + sortBy + ", sortOrder=" + sortOrder + ", repoOwnerId=" + repoOwnerId + "]";
 	}
 
 	

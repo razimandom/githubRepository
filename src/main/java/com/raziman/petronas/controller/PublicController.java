@@ -55,9 +55,9 @@ public class PublicController {
 	
 	@RequestMapping({"/list"})
     public String viewRepository(@ModelAttribute GitForm gitForm, 
-    		@RequestParam("topic") String topic,
-    		@RequestParam("language") String language,
-    		@RequestParam("page") String page,
+    		@RequestParam(value="topic", required=false) String topic,
+    		@RequestParam(value="language", required=false) String language,
+    		@RequestParam(value="page", required=false) String page,
     		ModelMap model) throws Exception {
     	
 		PublicService repoService = new PublicService();
@@ -75,6 +75,9 @@ public class PublicController {
 				+ " sortOrder: " + sortOrder	
 				);
 			
+//		topic = topic.equals(null) ? "" : topic;
+//		language = language.equals(null) ? "" : language;
+		
 		GitPublicResponse gitPublicResponse = repoService.getRepository(
 				apiCallService.createGitConnection(hostname, subURL, topic, language, sortBy, sortOrder));
 

@@ -72,9 +72,9 @@ public class AdminController {
 	
 	@RequestMapping("/list")
     public String viewAdmin(@ModelAttribute GitForm gitForm,
-    		@RequestParam("topic") String topic,
-    		@RequestParam("language") String language,
-    		@RequestParam("page") String page,
+    		@RequestParam(value="topic", required=false) String topic,
+    		@RequestParam(value="language", required=false) String language,
+    		@RequestParam(value="page", required=false) String page,
     		ModelMap model) throws Exception {
     	
 		AdminService adminService = new AdminService();
