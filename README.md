@@ -40,6 +40,13 @@ Password: 123
 8. As admin I want view report of search result
 9. As admin I want download search result
 
+<b>Report summary consist of:</b>
+1. Top watcher
+2. Top stars
+3. Latest created date 
+4. Latest updated date
+5. Latest pushed date
+
 <b>Test Cases:</b>
 1. Get response code 200 with valid topic and valid language
 2. Get response code 200 with null topic and valid language
