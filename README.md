@@ -29,7 +29,7 @@ Username: admin
 Password: 123
 ```
 
-<b>Use Case:</b>
+<b>Use Cases:</b>
 1. As user I want search git repository using topic
 2. As user I want search git repository using language
 3. As user I want view search result in table with pagination
@@ -39,6 +39,12 @@ Password: 123
 7. As admin I want to login to view admin page
 8. As admin I want view report of search result
 9. As admin I want download search result
+
+<b>Test Cases:</b>
+1. Get response code 200 with valid topic and valid language
+2. Get response code 200 with null topic and valid language
+3. Get response code 200 with valid topic and null language
+4. Get count must >=0
 
 <b>Technologies:</b>
 1. Java 8
